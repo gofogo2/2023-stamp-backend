@@ -10,5 +10,6 @@ datasource db {
 model UserInfo {
   id      Int     @id @default(autoincrement())
   email String?
+  region String?
   createdAt    DateTime   @default(now())
 }
