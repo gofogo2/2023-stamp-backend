@@ -8,7 +8,7 @@ export class UserController {
 
   @Get('/list/:index')
   async list(@Param('index') index: string): Promise<UserInfo[]> {
-    console.log(index);
+    console.log(`/list/:index ${index}`);
     return this.service.list(index);
   }
 
@@ -16,5 +16,12 @@ export class UserController {
   async add(@Body() item: UserInfo): Promise<UserInfo> {
     console.log(item);
     return this.service.add(item);
+  }
+
+  @Post('/delete-all')
+  async delete():Promise<boolean>{
+    console.log('delete');
+    await this.service.delete();
+    return true;
   }
 }

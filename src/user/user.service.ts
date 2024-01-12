@@ -5,7 +5,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 export class UserService {
   client;
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
   async add(item: UserInfo): Promise<UserInfo> {
     console.log(item);
     const { region, email } = item;
@@ -23,5 +23,19 @@ export class UserService {
     const result = await this.prisma.userInfo.findMany();
 
     return result;
+  }
+  async listRegion(region: string): Promise<UserInfo[]> {
+    const result = await this.prisma.userInfo.findMany({
+      where: {
+        region
+      }
+    });
+
+    return result;
+  }
+
+  async delete(): Promise<boolean> {
+    const result = (await this.prisma.userInfo.deleteMany());
+    return true;
   }
 }
